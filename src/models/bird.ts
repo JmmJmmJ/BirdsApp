@@ -1,5 +1,5 @@
 export interface Bird {
-  birdId: number
+  Id: number
   species: string
   binomial_name: string
 }

@@ -1,20 +1,23 @@
+import { Typography } from '@mui/material'
+import { useState, useEffect } from 'react'
 import { Bird } from '../models/bird'
+import TableB2 from './TableB'
 
-interface Props {
-  birds: Bird[]
-}
+export default function Birds() {
+  const [birds, setBirds] = useState<Bird[]>([])
 
-export default function Birds({ birds }: Props) {
+  useEffect(() => {
+    fetch('https://localhost:7212/api/birds')
+      .then((response) => response.json())
+      .then((data) => setBirds(data))
+  }, [])
+
   return (
     <>
-      <h1>Birds</h1>
-      <ul>
-        {birds.map((bird) => (
-          <li>
-            {bird.species} - {bird.binomial_name}
-          </li>
-        ))}
-      </ul>
+      <Typography sx={{ m: 2 }} variant="h6">
+        Birds
+      </Typography>
+      <TableB2 birds={birds} />
     </>
   )
 }
