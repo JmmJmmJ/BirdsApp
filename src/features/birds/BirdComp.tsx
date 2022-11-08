@@ -1,4 +1,4 @@
-import { Bird } from '../models/bird'
+import { Bird } from '../../models/bird'
 
 interface Props {
   bird: Bird

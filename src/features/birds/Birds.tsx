@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material'
 import { useState, useEffect } from 'react'
-import { Bird } from '../models/bird'
-import TableB2 from './TableB'
+import { Bird } from '../../models/bird'
+import TableB from './TableB'
 
 export default function Birds() {
   const [birds, setBirds] = useState<Bird[]>([])
@@ -17,7 +17,7 @@ export default function Birds() {
       <Typography sx={{ m: 2 }} variant="h6">
         Birds
       </Typography>
-      <TableB2 birds={birds} />
+      <TableB birds={birds} />
     </>
   )
 }

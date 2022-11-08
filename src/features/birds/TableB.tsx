@@ -1,10 +1,12 @@
 import {
   DataGrid,
   GridColDef,
+  GridEventListener,
   GridToolbar,
   GridValueGetterParams,
 } from '@mui/x-data-grid'
-import { Bird } from '../models/bird'
+import { Navigate, useNavigate } from 'react-router-dom'
+import { Bird } from '../../models/bird'
 
 interface Props {
   birds: Bird[]
@@ -15,17 +17,20 @@ const columns: GridColDef[] = [
   { field: 'binomial_name', headerName: 'Last name', width: 130 },
 ]
 
-const rows = [
-  { id: 1, species: 'Snow', binomial_name: 'Jon' },
-  { id: 2, species: 'Snow', binomial_name: 'Jon' },
-  { id: 3, species: 'Snow', binomial_name: 'Jon' },
-]
-
 export default function DataTable({ birds }: Props) {
+  const navigate = useNavigate()
+
+  const handleEvent: GridEventListener<'rowClick'> = (
+    params // GridRowParams
+  ) => {
+    navigate(`/bird/${params.id}`)
+  }
+
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid
         sx={{ m: 2 }}
+        onRowClick={handleEvent}
         components={{
           Toolbar: GridToolbar,
         }}

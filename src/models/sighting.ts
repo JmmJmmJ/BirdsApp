@@ -6,4 +6,5 @@ export interface Sighting {
   comment: string
   place: string
   birdSpecies: string
+  birdId: number
 }
