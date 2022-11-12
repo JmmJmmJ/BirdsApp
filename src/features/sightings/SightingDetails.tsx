@@ -1,18 +1,17 @@
-import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import agent from '../../app/api/agent'
 import { Sighting } from '../../models/sighting'
 import SightingComp from './SightingComp'
 
 export default function SightingDetails() {
-  const { id } = useParams<{ id: string }>()
+  const { id } = useParams() as { id: string }
   const [sighting, setSighting] = useState<Sighting | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    axios
-      .get(`https://localhost:7212/api/sightings/${id}`)
-      .then((response) => setSighting(response.data))
+    agent.Sightings.sighting(parseInt(id))
+      .then((response) => setSighting(response))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
   }, [id])

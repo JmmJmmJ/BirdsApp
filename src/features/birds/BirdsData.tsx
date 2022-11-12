@@ -1,19 +1,18 @@
-import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import agent from '../../app/api/agent'
 import { Bird } from '../../models/bird'
 import SightingsByBird from '../sightings/SightingsByBird'
 import BirdComp from './BirdComp'
 
 export default function BirdsData() {
-  const { id } = useParams<{ id: string }>()
+  const { id } = useParams() as { id: string }
   const [bird, setBird] = useState<Bird | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    axios
-      .get(`https://localhost:7212/api/birds/${id}`)
-      .then((response) => setBird(response.data))
+    agent.Birds.bird(parseInt(id))
+      .then((response) => setBird(response))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
   }, [id])
@@ -25,7 +24,7 @@ export default function BirdsData() {
   return (
     <>
       <BirdComp bird={bird} />
-      <SightingsByBird id={id} />
+      <SightingsByBird id={parseInt(id)} />
     </>
   )
 }

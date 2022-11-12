@@ -1,11 +1,12 @@
 import { Typography } from '@mui/material'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
+import agent from '../../app/api/agent'
 import { Sighting } from '../../models/sighting'
 import TableS from './TableS'
 
 interface Props {
-  id: string | undefined
+  id: number
 }
 
 export default function SightingsByBird({ id }: Props) {
@@ -13,9 +14,8 @@ export default function SightingsByBird({ id }: Props) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    axios
-      .get(`https://localhost:7212/api/sightings/bird/${id}`)
-      .then((response) => setSightings(response.data))
+    agent.Sightings.sightingsByBird(id)
+      .then((response) => setSightings(response))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
   }, [id])
