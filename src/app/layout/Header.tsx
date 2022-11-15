@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 const leftLinks = [
   { title: 'Birds', path: '/' },
   { title: 'Sightings', path: '/sightings' },
+  { title: 'About', path: '/about' },
 ]
 
 const rightLinks = [
