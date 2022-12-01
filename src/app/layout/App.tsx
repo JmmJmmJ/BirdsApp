@@ -9,6 +9,7 @@ import Sightings from '../../features/sightings/Sightings'
 import Header from './Header'
 import 'react-toastify/dist/ReactToastify.css'
 import NotFound from '../errors/NotFound'
+import AddSighting from '../../features/sightings/AddSighting'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/bird/:id" element={<BirdsData />} />
         <Route path="/sighting/:id" element={<SightingDetails />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/sightings/add/:id" element={<AddSighting />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

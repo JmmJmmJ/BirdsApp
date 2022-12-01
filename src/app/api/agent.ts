@@ -42,7 +42,7 @@ const requests = {
   get: (url: string) => axios.get(url).then(responseBody),
   post: (url: string, body: {}) => axios.post(url, body).then(responseBody),
   put: (url: string, body: {}) => axios.put(url, body).then(responseBody),
-  delete: (url: string) => axios.get(url).then(responseBody),
+  delete: (url: string) => axios.delete(url).then(responseBody),
 }
 
 const Birds = {
@@ -54,6 +54,8 @@ const Sightings = {
   list: () => requests.get('sightings'),
   sighting: (id: number) => requests.get(`sightings/${id}`),
   sightingsByBird: (id: number) => requests.get(`sightings/bird/${id}`),
+  sightingDelete: (id: number) => requests.delete(`sightings/${id}`),
+  sightingAdd: (body: {}) => requests.post(`sightings`, body),
 }
 
 const TestErrors = {
