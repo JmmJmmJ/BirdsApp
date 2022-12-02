@@ -56,6 +56,7 @@ const Sightings = {
   sightingsByBird: (id: number) => requests.get(`sightings/bird/${id}`),
   sightingDelete: (id: number) => requests.delete(`sightings/${id}`),
   sightingAdd: (body: {}) => requests.post(`sightings`, body),
+  sightingEdit: (body: {}) => requests.put(`sightings`, body),
 }
 
 const TestErrors = {

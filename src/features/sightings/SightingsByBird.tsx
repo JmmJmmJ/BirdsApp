@@ -29,7 +29,7 @@ export default function SightingsByBird({ id }: Props) {
       <Typography sx={{ m: 2 }} variant="h6">
         Sightings
       </Typography>
-      <TableS sightings={sightings} />
+      <TableS sightings={sightings} setSightings={setSightings} />
     </>
   )
 }

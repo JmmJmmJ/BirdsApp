@@ -5,20 +5,21 @@ import { useLocation, useParams } from 'react-router-dom'
 import agent from '../../app/api/agent'
 
 export default function EditSighting() {
-  const { id } = useParams() as { id: string }
+  const { id, idb } = useParams() as { id: string; idb: string }
   const [loading, setLoading] = useState(false)
-  const [date, setDate] = useState('')
-  const [place, setPlace] = useState('')
-  const [comment, setComment] = useState('')
+  const [date, setDate] = useState(useLocation().state.specie.date)
+  const [place, setPlace] = useState(useLocation().state.specie.place)
+  const [comment, setComment] = useState(useLocation().state.specie.comment)
 
-  function handleAdd(): void {
-    if (window.confirm(`Add?`)) {
+  function handleEdit(): void {
+    if (window.confirm(`Edit?`)) {
       setLoading(true)
-      agent.Sightings.sightingAdd({
+      agent.Sightings.sightingEdit({
+        id: id,
         date: date,
         comment: comment,
         place: place,
-        birdId: id,
+        birdId: idb,
       })
         .catch((error) => console.log(error))
         .finally(() => setLoading(false))
@@ -34,31 +35,34 @@ export default function EditSighting() {
       noValidate
       autoComplete="off"
     >
-      <Typography>{useLocation().state.species}</Typography>
+      <Typography>{useLocation().state.specie.birdSpecies}</Typography>
       <TextField
         onChange={(e) => setDate(e.target.value)}
         id="outlined-basic"
         label="Date"
+        defaultValue={useLocation().state.specie.date}
         variant="outlined"
       />
       <TextField
         onChange={(e) => setPlace(e.target.value)}
         id="outlined-basic"
         label="Place"
+        defaultValue={useLocation().state.specie.place}
         variant="outlined"
       />
       <TextField
         onChange={(e) => setComment(e.target.value)}
         id="outlined-basic"
         label="Comment"
+        defaultValue={useLocation().state.specie.comment}
         variant="outlined"
       />
       <LoadingButton
         loading={loading}
-        onClick={() => handleAdd()}
+        onClick={() => handleEdit()}
         variant="contained"
       >
-        Add
+        Edit
       </LoadingButton>
     </Box>
   )
