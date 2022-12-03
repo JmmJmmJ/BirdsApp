@@ -6,7 +6,7 @@ interface Props {
 }
 
 export default function SightingComp({ sighting }: Props) {
-  const link = `/bird/${sighting.birdId}`
+  const link = `/birds/${sighting.birdId}`
 
   return (
     <li>

@@ -69,11 +69,11 @@ export default function DataTable({ sightings, setSightings }: Props) {
   ]
 
   function handleView(event: MouseEvent, params: GridRenderCellParams): void {
-    navigate(`/sighting/${params.id}`)
+    navigate(`/sightings/${params.id}`)
   }
 
   function handleEdit(event: MouseEvent, params: GridRenderCellParams): void {
-    navigate(`/sightings/edit/${params.id}/bird/${params.row.birdId}`, {
+    navigate(`/sightings/${params.id}/birds/${params.row.birdId}/edit`, {
       state: { specie: params.row },
     })
   }

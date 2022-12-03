@@ -21,12 +21,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Birds />} />
         <Route path="/sightings" element={<Sightings />} />
-        <Route path="/bird/:id" element={<BirdsData />} />
-        <Route path="/sighting/:id" element={<SightingDetails />} />
+        <Route path="/birds/:id" element={<BirdsData />} />
+        <Route path="/sightings/:id" element={<SightingDetails />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/sightings/add/:id" element={<AddSighting />} />
+        <Route path="/sightings/:id/add" element={<AddSighting />} />
         <Route
-          path="/sightings/edit/:id/bird/:idb"
+          path="/sightings/:id/birds/:idb/edit"
           element={<EditSighting />}
         />
         <Route path="*" element={<NotFound />} />

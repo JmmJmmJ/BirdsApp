@@ -60,7 +60,7 @@ export default function DataTable({ birds }: Props) {
     event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
     params: GridRenderCellParams<any, any, any>
   ): void {
-    navigate(`/sightings/add/${params.id}`, {
+    navigate(`/sightings/${params.id}/add`, {
       state: { species: params.row.species },
     })
   }
@@ -69,7 +69,7 @@ export default function DataTable({ birds }: Props) {
     event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
     params: GridRenderCellParams<any, any, any>
   ): void {
-    navigate(`/bird/${params.id}`)
+    navigate(`/birds/${params.id}`)
   }
 
   return (
