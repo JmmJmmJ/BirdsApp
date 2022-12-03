@@ -88,10 +88,10 @@ export default function DataTable({ sightings, setSightings }: Props) {
 
     if (window.confirm(`Delete ${remove?.comment}?`)) {
       agent.Sightings.sightingDelete(id)
-        .catch((error) => console.log(error))
         .then(() => {
           setSightings(sightings.filter((person) => person.id !== id))
         })
+        .catch((error) => console.log(error))
         .finally(() => setLoading(false))
     }
   }

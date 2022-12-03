@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import agent from '../../app/api/agent'
 
-export default function EditSighting() {
+export default function AddSighting() {
   const { id } = useParams() as { id: string }
   const [loading, setLoading] = useState(false)
   const [date, setDate] = useState('')
