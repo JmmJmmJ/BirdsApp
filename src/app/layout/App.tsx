@@ -11,8 +11,19 @@ import 'react-toastify/dist/ReactToastify.css'
 import NotFound from '../errors/NotFound'
 import AddSighting from '../../features/sightings/AddSighting'
 import EditSighting from '../../features/sightings/EditSighting'
+import Login from '../../features/account/Login'
+import Register from '../../features/account/Register'
+import { useEffect } from 'react'
+import agent from '../api/agent'
 
 function App() {
+  useEffect(() => {
+    const loggedUserToken = window.localStorage.getItem('userToken')
+    if (loggedUserToken) {
+      agent.setToken('bearer ' + loggedUserToken)
+    }
+  }, [])
+
   return (
     <>
       <ToastContainer theme="colored" position="bottom-right" hideProgressBar />
@@ -29,6 +40,8 @@ function App() {
           path="/sightings/:id/birds/:idb/edit"
           element={<EditSighting />}
         />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

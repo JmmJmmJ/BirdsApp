@@ -7,6 +7,21 @@ axios.defaults.baseURL = 'https://localhost:7212/api/'
 
 const responseBody = (response: AxiosResponse) => response.data
 
+let token: string = ''
+
+const setToken = (newToken: string) => {
+  token = newToken
+}
+
+const create = async (newObject: any) => {
+  const config = {
+    headers: { Authorization: token },
+  }
+
+  const response = await axios.post('sightings', newObject, config)
+  return response.data
+}
+
 axios.interceptors.response.use(
   async (response) => {
     //await sleep()
@@ -41,6 +56,8 @@ axios.interceptors.response.use(
 const requests = {
   get: (url: string) => axios.get(url).then(responseBody),
   post: (url: string, body: {}) => axios.post(url, body).then(responseBody),
+  postAuth: (url: string, body: {}, config: any) =>
+    axios.post(url, body, config).then(responseBody),
   put: (url: string, body: {}) => axios.put(url, body).then(responseBody),
   delete: (url: string) => axios.delete(url).then(responseBody),
 }
@@ -59,6 +76,12 @@ const Sightings = {
   sightingEdit: (body: {}) => requests.put(`sightings`, body),
 }
 
+const Account = {
+  login: (values: any) => requests.post('account/login', values),
+  register: (values: any) => requests.post('account/register', values),
+  currentUser: () => requests.get('account/currentUser'),
+}
+
 const TestErrors = {
   get400Error: () => requests.get('buggy/bad-request'),
   get401Error: () => requests.get('buggy/unauthorised'),
@@ -68,9 +91,12 @@ const TestErrors = {
 }
 
 const agent = {
+  Account,
   Birds,
   Sightings,
   TestErrors,
+  setToken,
+  create,
 }
 
 export default agent

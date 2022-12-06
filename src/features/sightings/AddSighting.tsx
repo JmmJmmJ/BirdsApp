@@ -14,12 +14,13 @@ export default function AddSighting() {
   function handleAdd(): void {
     if (window.confirm(`Add?`)) {
       setLoading(true)
-      agent.Sightings.sightingAdd({
-        date: date,
-        comment: comment,
-        place: place,
-        birdId: id,
-      })
+      agent
+        .create({
+          date: date,
+          comment: comment,
+          place: place,
+          birdId: id,
+        })
         .catch((error) => console.log(error))
         .finally(() => setLoading(false))
     }
