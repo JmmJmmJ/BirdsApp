@@ -13,25 +13,21 @@ import AddSighting from '../../features/sightings/AddSighting'
 import EditSighting from '../../features/sightings/EditSighting'
 import Login from '../../features/account/Login'
 import Register from '../../features/account/Register'
-import { useEffect } from 'react'
-import agent from '../api/agent'
+import SightingsByUser from '../../features/sightings/SightingsByUser'
+import { useState } from 'react'
 
 function App() {
-  useEffect(() => {
-    const loggedUserToken = window.localStorage.getItem('userToken')
-    if (loggedUserToken) {
-      agent.setToken('bearer ' + loggedUserToken)
-    }
-  }, [])
+  const [auth, setAuth] = useState(false)
 
   return (
     <>
       <ToastContainer theme="colored" position="bottom-right" hideProgressBar />
       <CssBaseline />
-      <Header />
+      <Header auth={auth} setAuth={setAuth} />
       <Routes>
         <Route path="/" element={<Birds />} />
         <Route path="/sightings" element={<Sightings />} />
+        <Route path="/sightings/users" element={<SightingsByUser />} />
         <Route path="/birds/:id" element={<BirdsData />} />
         <Route path="/sightings/:id" element={<SightingDetails />} />
         <Route path="/about" element={<AboutPage />} />
@@ -40,7 +36,7 @@ function App() {
           path="/sightings/:id/birds/:idb/edit"
           element={<EditSighting />}
         />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login setAuth={setAuth} />} />
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

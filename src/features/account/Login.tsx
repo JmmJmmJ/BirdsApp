@@ -12,6 +12,10 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Link } from 'react-router-dom'
 import agent from '../../app/api/agent'
 
+interface Props {
+  setAuth: any
+}
+
 function Copyright(props: any) {
   return (
     <Typography
@@ -29,7 +33,7 @@ function Copyright(props: any) {
 
 const theme = createTheme()
 
-export default function Login() {
+export default function Login({ setAuth }: Props) {
   const [values, setValues] = React.useState({
     username: '',
     password: '',
@@ -38,7 +42,10 @@ export default function Login() {
   const handleSubmit = async (event: any) => {
     event.preventDefault()
     const user = await agent.Account.login(values)
-    window.localStorage.setItem('userToken', user.token)
+    if (user) {
+      window.localStorage.setItem('userToken', user.token)
+      setAuth(true)
+    }
   }
 
   function handleInputChange(event: any) {

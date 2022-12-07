@@ -1,34 +1,30 @@
 import { Typography } from '@mui/material'
 import { useState, useEffect } from 'react'
 import agent from '../../app/api/agent'
+import LoadingComponent from '../../app/layout/LoadingComponent'
 import { Sighting } from '../../models/sighting'
-import TableS from './TableS'
+import TableSightingsUsers from './TableSightingsUsers'
 
-interface Props {
-  id: number
-}
-
-export default function SightingsByBird({ id }: Props) {
+export default function Sightings() {
   const [sightings, setSightings] = useState<Sighting[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    agent.Sightings.sightingsByBird(id)
+    agent
+      .getSightingsByUser()
       .then((response) => setSightings(response))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
-  }, [id])
+  }, [])
 
-  if (loading) return <h3>Loading...</h3>
-
-  if (!sightings) return <h3>Sightings not found</h3>
+  if (loading) return <LoadingComponent message="Loading sightings..." />
 
   return (
     <>
       <Typography sx={{ m: 2 }} variant="h6">
         Sightings
       </Typography>
-      <TableS sightings={sightings} setSightings={setSightings} />
+      <TableSightingsUsers sightings={sightings} setSightings={setSightings} />
     </>
   )
 }

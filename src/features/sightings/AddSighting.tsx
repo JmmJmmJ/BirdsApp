@@ -15,7 +15,7 @@ export default function AddSighting() {
     if (window.confirm(`Add?`)) {
       setLoading(true)
       agent
-        .create({
+        .createSighting({
           date: date,
           comment: comment,
           place: place,

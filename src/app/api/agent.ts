@@ -7,20 +7,25 @@ axios.defaults.baseURL = 'https://localhost:7212/api/'
 
 const responseBody = (response: AxiosResponse) => response.data
 
-let token: string = ''
-
-const setToken = (newToken: string) => {
-  token = newToken
-}
-
-const create = async (newObject: any) => {
-  const config = {
-    headers: { Authorization: token },
-  }
-
-  const response = await axios.post('sightings', newObject, config)
+const createSighting = async (newObject: any) => {
+  const response = await axios.post('sightings', newObject)
   return response.data
 }
+
+const getSightingsByUser = async () => {
+  const response = await axios.get('sightings/user')
+  return response.data
+}
+
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem('userToken')
+
+  if (token) {
+    config.headers!.Authorization = `Bearer ${token}`
+  }
+
+  return config
+})
 
 axios.interceptors.response.use(
   async (response) => {
@@ -69,6 +74,7 @@ const Birds = {
 
 const Sightings = {
   list: () => requests.get('sightings'),
+  listByUser: () => requests.get('sightings/user'),
   sighting: (id: number) => requests.get(`sightings/${id}`),
   sightingsByBird: (id: number) => requests.get(`birds/${id}/sightings`),
   sightingDelete: (id: number) => requests.delete(`sightings/${id}`),
@@ -95,8 +101,8 @@ const agent = {
   Birds,
   Sightings,
   TestErrors,
-  setToken,
-  create,
+  createSighting,
+  getSightingsByUser,
 }
 
 export default agent
