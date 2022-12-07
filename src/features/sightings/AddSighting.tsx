@@ -12,15 +12,14 @@ export default function AddSighting() {
   const [comment, setComment] = useState('')
 
   function handleAdd(): void {
-    if (window.confirm(`Add?`)) {
+    if (window.confirm(`Lisää?`)) {
       setLoading(true)
-      agent
-        .createSighting({
-          date: date,
-          comment: comment,
-          place: place,
-          birdId: id,
-        })
+      agent.Sightings.sightingAdd({
+        date: date,
+        comment: comment,
+        place: place,
+        birdId: id,
+      })
         .catch((error) => console.log(error))
         .finally(() => setLoading(false))
     }
@@ -39,19 +38,19 @@ export default function AddSighting() {
       <TextField
         onChange={(e) => setDate(e.target.value)}
         id="outlined-basic"
-        label="Date"
+        label="Päivämäärä"
         variant="outlined"
       />
       <TextField
         onChange={(e) => setPlace(e.target.value)}
         id="outlined-basic"
-        label="Place"
+        label="Paikka"
         variant="outlined"
       />
       <TextField
         onChange={(e) => setComment(e.target.value)}
         id="outlined-basic"
-        label="Comment"
+        label="Kommentti"
         variant="outlined"
       />
       <LoadingButton
@@ -59,7 +58,7 @@ export default function AddSighting() {
         onClick={() => handleAdd()}
         variant="contained"
       >
-        Add
+        Lisää
       </LoadingButton>
     </Box>
   )

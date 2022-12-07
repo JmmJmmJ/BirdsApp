@@ -2,13 +2,11 @@ import { Button } from '@mui/material'
 import {
   DataGrid,
   GridColDef,
-  GridEventListener,
   GridRenderCellParams,
   GridToolbar,
-  GridValueGetterParams,
 } from '@mui/x-data-grid'
 import { MouseEvent } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Bird } from '../../models/bird'
 
 interface Props {
@@ -18,31 +16,25 @@ interface Props {
 export default function DataTable({ birds }: Props) {
   const navigate = useNavigate()
 
-  const handleEvent: GridEventListener<'rowClick'> = (
-    params // GridRowParams
-  ) => {
-    navigate(`/bird/${params.id}`)
-  }
-
   const columns: GridColDef[] = [
-    { field: 'species', headerName: 'First name', width: 130 },
-    { field: 'binomial_name', headerName: 'Last name', width: 130 },
+    { field: 'species', headerName: 'Laji', width: 130 },
+    { field: 'binomial_name', headerName: 'Tieteellinen nimi', width: 200 },
     {
       field: 'view',
-      headerName: 'View',
+      headerName: '',
       renderCell: (params: GridRenderCellParams) => (
         <Button
           onClick={(event) => handleView(event, params)}
           variant="contained"
           size="small"
         >
-          View
+          Näytä
         </Button>
       ),
     },
     {
       field: 'add',
-      headerName: 'Add',
+      headerName: '',
       width: 260,
       renderCell: (params: GridRenderCellParams) => (
         <Button
@@ -50,7 +42,7 @@ export default function DataTable({ birds }: Props) {
           variant="contained"
           size="small"
         >
-          Add sighting
+          Lisää havainto
         </Button>
       ),
     },

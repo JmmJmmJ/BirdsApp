@@ -10,8 +10,7 @@ export default function Sightings() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    agent
-      .getSightingsByUser()
+    agent.Sightings.listByUser()
       .then((response) => setSightings(response))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
@@ -21,9 +20,7 @@ export default function Sightings() {
 
   return (
     <>
-      <Typography sx={{ m: 2 }} variant="h6">
-        Sightings
-      </Typography>
+      <Typography sx={{ m: 2 }} variant="h6"></Typography>
       <TableSightingsUsers sightings={sightings} setSightings={setSightings} />
     </>
   )

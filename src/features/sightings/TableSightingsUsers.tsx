@@ -21,26 +21,26 @@ export default function DataTable({ sightings, setSightings }: Props) {
   const [loading, setLoading] = useState(false)
 
   const columns: GridColDef[] = [
-    { field: 'date', headerName: 'Date', width: 130 },
-    { field: 'birdSpecies', headerName: 'Species', width: 130 },
-    { field: 'place', headerName: 'Place', width: 130 },
-    { field: 'comment', headerName: 'Comment', width: 130 },
+    { field: 'date', headerName: 'Päivämäärä', width: 130 },
+    { field: 'birdSpecies', headerName: 'Laji', width: 130 },
+    { field: 'place', headerName: 'Paikka', width: 130 },
+    { field: 'comment', headerName: 'Kommentti', width: 130 },
     {
       field: 'view',
-      headerName: 'View',
+      headerName: '',
       renderCell: (params: GridRenderCellParams) => (
         <Button
           onClick={(event) => handleView(event, params)}
           variant="contained"
           size="small"
         >
-          View
+          Näytä
         </Button>
       ),
     },
     {
       field: 'delete',
-      headerName: 'Delete',
+      headerName: '',
       renderCell: (params: GridRenderCellParams) => (
         <LoadingButton
           loading={loading}
@@ -48,13 +48,13 @@ export default function DataTable({ sightings, setSightings }: Props) {
           variant="contained"
           size="small"
         >
-          Delete
+          Poista
         </LoadingButton>
       ),
     },
     {
       field: 'edit',
-      headerName: 'Edit',
+      headerName: '',
       renderCell: (params: GridRenderCellParams) => (
         <LoadingButton
           loading={loading}
@@ -62,7 +62,7 @@ export default function DataTable({ sightings, setSightings }: Props) {
           variant="contained"
           size="small"
         >
-          Edit
+          Muokkaa
         </LoadingButton>
       ),
     },
@@ -86,7 +86,7 @@ export default function DataTable({ sightings, setSightings }: Props) {
     setLoading(true)
     const remove = sightings.find((sighting) => sighting.id === id)
 
-    if (window.confirm(`Delete ${remove?.comment}?`)) {
+    if (window.confirm(`Poista ${remove?.comment}?`)) {
       agent.Sightings.sightingDelete(id)
         .then(() => {
           setSightings(sightings.filter((person) => person.id !== id))

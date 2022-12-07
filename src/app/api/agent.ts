@@ -7,16 +7,6 @@ axios.defaults.baseURL = 'https://localhost:7212/api/'
 
 const responseBody = (response: AxiosResponse) => response.data
 
-const createSighting = async (newObject: any) => {
-  const response = await axios.post('sightings', newObject)
-  return response.data
-}
-
-const getSightingsByUser = async () => {
-  const response = await axios.get('sightings/user')
-  return response.data
-}
-
 axios.interceptors.request.use((config) => {
   const token = localStorage.getItem('userToken')
 
@@ -61,8 +51,6 @@ axios.interceptors.response.use(
 const requests = {
   get: (url: string) => axios.get(url).then(responseBody),
   post: (url: string, body: {}) => axios.post(url, body).then(responseBody),
-  postAuth: (url: string, body: {}, config: any) =>
-    axios.post(url, body, config).then(responseBody),
   put: (url: string, body: {}) => axios.put(url, body).then(responseBody),
   delete: (url: string) => axios.delete(url).then(responseBody),
 }
@@ -101,8 +89,6 @@ const agent = {
   Birds,
   Sightings,
   TestErrors,
-  createSighting,
-  getSightingsByUser,
 }
 
 export default agent

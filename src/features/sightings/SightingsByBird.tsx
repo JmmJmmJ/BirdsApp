@@ -2,7 +2,7 @@ import { Typography } from '@mui/material'
 import { useState, useEffect } from 'react'
 import agent from '../../app/api/agent'
 import { Sighting } from '../../models/sighting'
-import TableS from './TableS'
+import TableS from './TableSightings'
 
 interface Props {
   id: number
@@ -26,7 +26,7 @@ export default function SightingsByBird({ id }: Props) {
   return (
     <>
       <Typography sx={{ m: 2 }} variant="h6">
-        Sightings
+        Havainnot
       </Typography>
       <TableS sightings={sightings} setSightings={setSightings} />
     </>

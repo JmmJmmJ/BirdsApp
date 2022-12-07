@@ -12,7 +12,7 @@ export default function EditSighting() {
   const [comment, setComment] = useState(useLocation().state.specie.comment)
 
   function handleEdit(): void {
-    if (window.confirm(`Edit?`)) {
+    if (window.confirm(`Muokkaa?`)) {
       setLoading(true)
       agent.Sightings.sightingEdit({
         id: id,
@@ -39,21 +39,21 @@ export default function EditSighting() {
       <TextField
         onChange={(e) => setDate(e.target.value)}
         id="outlined-basic"
-        label="Date"
+        label="Päivämäärä"
         defaultValue={useLocation().state.specie.date}
         variant="outlined"
       />
       <TextField
         onChange={(e) => setPlace(e.target.value)}
         id="outlined-basic"
-        label="Place"
+        label="Paikka"
         defaultValue={useLocation().state.specie.place}
         variant="outlined"
       />
       <TextField
         onChange={(e) => setComment(e.target.value)}
         id="outlined-basic"
-        label="Comment"
+        label="Kommentti"
         defaultValue={useLocation().state.specie.comment}
         variant="outlined"
       />
@@ -62,7 +62,7 @@ export default function EditSighting() {
         onClick={() => handleEdit()}
         variant="contained"
       >
-        Edit
+        Muokkaa
       </LoadingButton>
     </Box>
   )

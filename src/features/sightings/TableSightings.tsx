@@ -18,20 +18,20 @@ export default function DataTable({ sightings, setSightings }: Props) {
   const navigate = useNavigate()
 
   const columns: GridColDef[] = [
-    { field: 'date', headerName: 'Date', width: 130 },
-    { field: 'birdSpecies', headerName: 'Species', width: 130 },
-    { field: 'place', headerName: 'Place', width: 130 },
-    { field: 'comment', headerName: 'Comment', width: 130 },
+    { field: 'date', headerName: 'Päivämäärä', width: 130 },
+    { field: 'birdSpecies', headerName: 'Laji', width: 130 },
+    { field: 'place', headerName: 'Paikka', width: 130 },
+    { field: 'comment', headerName: 'Kommentti', width: 130 },
     {
       field: 'view',
-      headerName: 'View',
+      headerName: '',
       renderCell: (params: GridRenderCellParams) => (
         <Button
           onClick={(event) => handleView(event, params)}
           variant="contained"
           size="small"
         >
-          View
+          Näytä
         </Button>
       ),
     },

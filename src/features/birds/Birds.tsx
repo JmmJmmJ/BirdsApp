@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import agent from '../../app/api/agent'
 import LoadingComponent from '../../app/layout/LoadingComponent'
 import { Bird } from '../../models/bird'
-import TableB from './TableB'
+import TableB from './TableBirds'
 
 export default function Birds() {
   const [birds, setBirds] = useState<Bird[]>([])
@@ -20,10 +20,14 @@ export default function Birds() {
 
   return (
     <>
-      <Typography sx={{ m: 2 }} variant="h6">
-        Birds
-      </Typography>
       <TableB birds={birds} />
+      <Typography variant="body2" color="text.secondary" align="center">
+        Tiedot:
+        <a href="https://laji.fi/">Suomen Lajitietokeskus </a>
+        <a href="https://creativecommons.org/licenses/by/4.0/deed.fi">
+          (CC BY 4.0)
+        </a>
+      </Typography>
     </>
   )
 }

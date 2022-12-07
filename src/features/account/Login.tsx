@@ -69,7 +69,7 @@ export default function Login({ setAuth }: Props) {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Kirjaudu
           </Typography>
           <Box
             component="form"
@@ -80,7 +80,7 @@ export default function Login({ setAuth }: Props) {
             <TextField
               margin="normal"
               fullWidth
-              label="Username"
+              label="Käyttäjätunnus"
               name="username"
               autoFocus
               onChange={handleInputChange}
@@ -90,7 +90,7 @@ export default function Login({ setAuth }: Props) {
               margin="normal"
               fullWidth
               name="password"
-              label="Password"
+              label="Salasana"
               type="password"
               onChange={handleInputChange}
               value={values.password}
@@ -101,11 +101,11 @@ export default function Login({ setAuth }: Props) {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Kirjaudu
             </Button>
             <Grid container>
               <Grid item>
-                <Link to="/register">{"Don't have an account? Sign Up"}</Link>
+                <Link to="/register">{'Rekisteröidy'}</Link>
               </Grid>
             </Grid>
           </Box>

@@ -1,9 +1,8 @@
-import { Typography } from '@mui/material'
 import { useState, useEffect } from 'react'
 import agent from '../../app/api/agent'
 import LoadingComponent from '../../app/layout/LoadingComponent'
 import { Sighting } from '../../models/sighting'
-import TableS from './TableS'
+import TableS from './TableSightings'
 
 export default function Sightings() {
   const [sightings, setSightings] = useState<Sighting[]>([])
@@ -20,9 +19,6 @@ export default function Sightings() {
 
   return (
     <>
-      <Typography sx={{ m: 2 }} variant="h6">
-        Sightings
-      </Typography>
       <TableS sightings={sightings} setSightings={setSightings} />
     </>
   )

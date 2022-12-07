@@ -1,21 +1,31 @@
-import { AppBar, Box, List, ListItem, Toolbar, Typography } from '@mui/material'
+import { AppBar, Box, List, ListItem, Toolbar } from '@mui/material'
 import { NavLink } from 'react-router-dom'
 
 const leftLinks = [
-  { title: 'Birds', path: '/' },
-  { title: 'Sightings', path: '/sightings' },
-  { title: 'About', path: '/about' },
+  { title: 'Linnut', path: '/' },
+  { title: 'Havainnot', path: '/sightings' },
+  { title: 'Tietoa', path: '/about' },
 ]
 
 const rightLinks = [
-  { title: 'login', path: '/login' },
-  { title: 'register', path: '/register' },
+  { title: 'Kirjaudu', path: '/login' },
+  { title: 'Rekisteröidy', path: '/register' },
 ]
 
 const navStyles = {
   color: 'inherit',
   textDecoration: 'none',
   typography: 'h6',
+  '&:hover': {
+    color: 'grey.500',
+  },
+  '&.active': { color: 'text.secondary' },
+}
+
+const loginStyles = {
+  color: 'inherit',
+  textDecoration: 'none',
+  typography: 'b1',
   '&:hover': {
     color: 'grey.500',
   },
@@ -39,7 +49,6 @@ export default function Header({ auth, setAuth }: any) {
           }}
         >
           <Box display="flex" alignItems="center">
-            <Typography variant="h6">BirdApp</Typography>
             <List sx={{ display: 'flex' }}>
               {leftLinks.map(({ title, path }) => (
                 <ListItem
@@ -48,7 +57,7 @@ export default function Header({ auth, setAuth }: any) {
                   key={path}
                   sx={navStyles}
                 >
-                  {title.toUpperCase()}
+                  {title}
                 </ListItem>
               ))}
               <ListItem
@@ -57,7 +66,7 @@ export default function Header({ auth, setAuth }: any) {
                 key="user"
                 sx={navStyles}
               >
-                My sightings
+                Havaintoni
               </ListItem>
             </List>
           </Box>
@@ -68,9 +77,9 @@ export default function Header({ auth, setAuth }: any) {
                   component={NavLink}
                   to={path}
                   key={path}
-                  sx={navStyles}
+                  sx={loginStyles}
                 >
-                  {title.toUpperCase()}
+                  {title}
                 </ListItem>
               ))}
               <ListItem
@@ -78,9 +87,9 @@ export default function Header({ auth, setAuth }: any) {
                 component={NavLink}
                 to="/"
                 key="logout"
-                sx={navStyles}
+                sx={loginStyles}
               >
-                Logout
+                Kirjaudu ulos
               </ListItem>
             </List>
           </Box>
@@ -98,7 +107,6 @@ export default function Header({ auth, setAuth }: any) {
           }}
         >
           <Box display="flex" alignItems="center">
-            <Typography variant="h6">BirdApp</Typography>
             <List sx={{ display: 'flex' }}>
               {leftLinks.map(({ title, path }) => (
                 <ListItem
@@ -107,7 +115,7 @@ export default function Header({ auth, setAuth }: any) {
                   key={path}
                   sx={navStyles}
                 >
-                  {title.toUpperCase()}
+                  {title}
                 </ListItem>
               ))}
             </List>
@@ -119,9 +127,9 @@ export default function Header({ auth, setAuth }: any) {
                   component={NavLink}
                   to={path}
                   key={path}
-                  sx={navStyles}
+                  sx={loginStyles}
                 >
-                  {title.toUpperCase()}
+                  {title}
                 </ListItem>
               ))}
             </List>
