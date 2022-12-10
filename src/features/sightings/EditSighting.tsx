@@ -2,6 +2,7 @@ import { LoadingButton } from '@mui/lab'
 import { Box, TextField, Typography } from '@mui/material'
 import { useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import agent from '../../app/api/agent'
 
 export default function EditSighting() {
@@ -11,10 +12,10 @@ export default function EditSighting() {
   const [place, setPlace] = useState(useLocation().state.specie.place)
   const [comment, setComment] = useState(useLocation().state.specie.comment)
 
-  function handleEdit(): void {
+  async function handleEdit() {
     if (window.confirm(`Muokkaa?`)) {
       setLoading(true)
-      agent.Sightings.sightingEdit({
+      const sightings = await agent.Sightings.sightingEdit({
         id: id,
         date: date,
         comment: comment,
@@ -23,6 +24,9 @@ export default function EditSighting() {
       })
         .catch((error) => console.log(error))
         .finally(() => setLoading(false))
+      if (sightings) {
+        toast.success('Havaintoa muokattu.')
+      }
     }
   }
 

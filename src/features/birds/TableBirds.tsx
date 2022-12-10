@@ -11,14 +11,21 @@ import { Bird } from '../../models/bird'
 
 interface Props {
   birds: Bird[]
+  auth: boolean
 }
 
-export default function DataTable({ birds }: Props) {
+export default function DataTable({ birds, auth }: Props) {
   const navigate = useNavigate()
 
   const columns: GridColDef[] = [
     { field: 'species', headerName: 'Laji', width: 130 },
     { field: 'binomial_name', headerName: 'Tieteellinen nimi', width: 200 },
+    {
+      field: 'conservation_status',
+      headerName: 'Uhanalaisuusluokitus',
+      width: 200,
+    },
+    { field: 'sightingsTotal', headerName: 'Havainnot', width: 200 },
     {
       field: 'view',
       headerName: '',
@@ -38,6 +45,7 @@ export default function DataTable({ birds }: Props) {
       width: 260,
       renderCell: (params: GridRenderCellParams) => (
         <Button
+          disabled={!auth}
           onClick={(event) => handleAdd(event, params)}
           variant="contained"
           size="small"

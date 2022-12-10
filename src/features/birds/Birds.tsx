@@ -5,7 +5,7 @@ import LoadingComponent from '../../app/layout/LoadingComponent'
 import { Bird } from '../../models/bird'
 import TableB from './TableBirds'
 
-export default function Birds() {
+export default function Birds({ auth }: any) {
   const [birds, setBirds] = useState<Bird[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -20,7 +20,7 @@ export default function Birds() {
 
   return (
     <>
-      <TableB birds={birds} />
+      <TableB birds={birds} auth={auth} />
       <Typography variant="body2" color="text.secondary" align="center">
         Tiedot:
         <a href="https://laji.fi/">Suomen Lajitietokeskus </a>

@@ -2,6 +2,7 @@ import { LoadingButton } from '@mui/lab'
 import { Box, TextField, Typography } from '@mui/material'
 import { useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import agent from '../../app/api/agent'
 
 export default function AddSighting() {
@@ -11,10 +12,10 @@ export default function AddSighting() {
   const [place, setPlace] = useState('')
   const [comment, setComment] = useState('')
 
-  function handleAdd(): void {
+  async function handleAdd() {
     if (window.confirm(`Lisää?`)) {
       setLoading(true)
-      agent.Sightings.sightingAdd({
+      const sighting = await agent.Sightings.sightingAdd({
         date: date,
         comment: comment,
         place: place,
@@ -22,6 +23,9 @@ export default function AddSighting() {
       })
         .catch((error) => console.log(error))
         .finally(() => setLoading(false))
+      if (sighting) {
+        toast.success('Havainto lisätty')
+      }
     }
   }
 

@@ -14,10 +14,19 @@ import EditSighting from '../../features/sightings/EditSighting'
 import Login from '../../features/account/Login'
 import Register from '../../features/account/Register'
 import SightingsByUser from '../../features/sightings/SightingsByUser'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import Registered from '../../features/account/Regitered'
 
 function App() {
   const [auth, setAuth] = useState(false)
+
+  useEffect(() => {
+    const token = window.localStorage.getItem('userToken')
+
+    if (token) {
+      setAuth(true)
+    }
+  }, [])
 
   return (
     <>
@@ -25,7 +34,7 @@ function App() {
       <CssBaseline />
       <Header auth={auth} setAuth={setAuth} />
       <Routes>
-        <Route path="/" element={<Birds />} />
+        <Route path="/" element={<Birds auth={auth} />} />
         <Route path="/sightings" element={<Sightings />} />
         <Route path="/sightings/users" element={<SightingsByUser />} />
         <Route path="/birds/:id" element={<BirdsData />} />
@@ -38,6 +47,7 @@ function App() {
         />
         <Route path="/login" element={<Login setAuth={setAuth} />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/registered" element={<Registered />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

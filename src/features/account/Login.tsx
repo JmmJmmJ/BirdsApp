@@ -9,7 +9,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import agent from '../../app/api/agent'
 
 interface Props {
@@ -38,6 +38,7 @@ export default function Login({ setAuth }: Props) {
     username: '',
     password: '',
   })
+  const navigate = useNavigate()
 
   const handleSubmit = async (event: any) => {
     event.preventDefault()
@@ -45,6 +46,7 @@ export default function Login({ setAuth }: Props) {
     if (user) {
       window.localStorage.setItem('userToken', user.token)
       setAuth(true)
+      navigate('/')
     }
   }
 
